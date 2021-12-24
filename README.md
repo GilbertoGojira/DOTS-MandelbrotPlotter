@@ -18,4 +18,4 @@ All the points are rendered into a texture and calculation can be configured ins
 Profiling of the Mandelbrot execution is displayed inside the viewport.
 
 #### TODO:
-Use pure DOTS. Right now the "hard" world is done using jobs and burst compiler which translates to insanely fast iteration times, but a pure DOTS would be more elegant for the future.
+Use pure DOTS. Right now the "hard" work is done using jobs and burst compiler which translates into insanely fast iteration times, but a pure DOTS would be more elegant for the future.
