@@ -463,14 +463,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press C to plot mandelbrot set
+  m_text: 'Press any key or click anywhere to plot Mandelbrot set
 
-    Left click to zoom in
+    Left click
+    to zoom in
 
-    Right click
-    to zoom out
+    Right click to zoom out
 
-    Press R to reset
+    Press R to reset viewport
 
 '
   m_isRightToLeft: 0
