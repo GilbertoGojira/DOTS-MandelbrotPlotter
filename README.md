@@ -1,11 +1,12 @@
 # DOTS-MandelbrotPlotter
 
-Plotting mandelbrot set using Unity DOTS
+Plotting Mandelbrot set using Unity DOTS
 
-Plots a Mandelbrot set using unity DOTS.
-Leverages Unity Jobs to calculate and plot a Mandelbrot set in a highly performant way.
-All the points are rendered into a texture and can be configured inside the MandelbrotPlotter Monobehaviour.
-![image](https://user-images.githubusercontent.com/5209751/147308181-56a0beae-ade1-4c58-9a57-d19de13fa053.png)
+Plots a Mandelbrot set using parts of unity DOTS.
+Leverage Unity Jobs and Burst to calculate and plot a Mandelbrot set in a highly performant way.
+All the points are rendered into a texture and calculation can be configured inside the MandelbrotPlotter Monobehaviour.
+![image](https://user-images.githubusercontent.com/5209751/147309630-e4f8bb0f-f4e9-43e2-bcd4-3e96d2fe9e35.png)
+
 
 ### Instruction
 
