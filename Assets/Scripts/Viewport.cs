@@ -27,6 +27,9 @@ namespace Mandelbrot {
       }
     }
 
+    public override string ToString() =>
+      $"Min: ({Min.x}, {Min.y}), Max: ({Max.x}, {Max.y}), Center: ({Center.x}, {Center.y})";
+
     public static implicit operator Viewport(double2 v) => new Viewport { Min = v, Max = v };
   }
 }
