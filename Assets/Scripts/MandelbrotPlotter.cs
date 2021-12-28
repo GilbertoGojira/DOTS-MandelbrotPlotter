@@ -51,6 +51,8 @@ namespace Mandelbrot {
 
   public class MandelbrotPlotter : MonoBehaviour {
     [SerializeField]
+    bool _dotsMode;
+    [SerializeField]
     int _width = 1024;
     [SerializeField]
     int _height = 1024;
@@ -126,7 +128,7 @@ namespace Mandelbrot {
     int GenerateColors(int width, int height) {
       using var totalIterations = new NativeCounter(Allocator.TempJob);
       using var colors = new NativeArray<Color32>(width * height, Allocator.TempJob);
-      new GenerateColorJob {
+      var jobHandle = new GenerateColorBurstJob {
         Step = new double2(_settings.Viewport.Width / width, _settings.Viewport.Height / height),
         Width = width,
         Height = height,
@@ -137,8 +139,8 @@ namespace Mandelbrot {
         DefaultColor = _settings.MandelbrotColor,
         Colors = colors,
         TotalIterations = totalIterations
-      }.ScheduleParallel(_width, 128, default)
-      .Complete();
+      }.ScheduleParallel(_width, 128, default);
+      jobHandle.Complete();
 
       _texture.LoadRawTextureData(colors);
       _texture.filterMode = _filterMode;
