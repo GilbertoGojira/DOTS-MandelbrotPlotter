@@ -3,7 +3,7 @@ using Unity.Jobs;
 using Unity.Rendering;
 
 namespace Mandelbrot {
-  public class CopyToRenderMesh : SystemBase {
+  public class CopyTextureToRenderMeshSystem : SystemBase {
     protected override void OnUpdate() {
       Entities
         .WithoutBurst()

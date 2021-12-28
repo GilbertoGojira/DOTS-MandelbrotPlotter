@@ -1,11 +1,13 @@
-using Mandelbrot;
 using Mandelbrot.Jobs;
 using Unity.Entities;
 using Unity.Jobs;
 
-[assembly: RegisterGenericComponentType(typeof(ComponentCopy<Config>))]
+/// <summary>
+/// Will create a copy of the component when that concrete component occurs
+/// The component will be cloned into a ComponentCopy<[Original Component]>
+/// </summary>
 namespace Mandelbrot {
-  public class InitializeCopyComponent<T> : SystemBase
+  public class InitializeCopyComponentSystem<T> : SystemBase
     where T : struct, IComponentData {
     BeginInitializationEntityCommandBufferSystem _entityCommandBufferSystem;
     EntityQuery _missingQuery;

@@ -3,6 +3,7 @@ using Mandelbrot.Jobs;
 using Unity.Entities;
 
 [assembly: RegisterGenericJobType(typeof(ComponentCopyJob<ComponentCopy<Config>, Config>))]
+[assembly: RegisterGenericComponentType(typeof(ComponentCopy<Config>))]
 namespace Mandelbrot {
-  public class InitializeCopyConfig : InitializeCopyComponent<Config> { }
+  public class InitializeCopyConfigSystem : InitializeCopyComponentSystem<Config> { }
 }

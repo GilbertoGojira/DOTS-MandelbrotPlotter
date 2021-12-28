@@ -3,9 +3,10 @@ using Unity.Jobs;
 using UnityEngine;
 
 namespace Mandelbrot {
-  public class CopyToTexture : SystemBase {
+  public class CopyToTextureSystem : SystemBase {
 
     protected override void OnUpdate() {
+      // Add TextureRef to all Entities with TextureConfig
       Entities
         .WithoutBurst()
         .WithStructuralChanges()
@@ -14,6 +15,8 @@ namespace Mandelbrot {
           EntityManager.AddComponentObject(entity, new TextureRef())
         ).Run();
 
+      // When TextureConfig changed will recreate the underlying texture object
+      // with proper config
       Entities
         .WithoutBurst()
         .WithChangeFilter<TextureConfig>()
@@ -25,6 +28,7 @@ namespace Mandelbrot {
           texture.Value.filterMode = config.Filter;
         }).Run();
 
+      // When PointColor changes will copy those into the underlying texture object
       Entities
         .WithoutBurst()
         .WithChangeFilter<PointColor>()
