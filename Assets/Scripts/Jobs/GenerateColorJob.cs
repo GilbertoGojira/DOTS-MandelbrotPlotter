@@ -41,7 +41,7 @@ namespace Mandelbrot.Jobs {
 
   [BurstCompile]
   struct GenerateColorJob : IJobFor {
-    public Config Config;
+    public MandelbrotConfig Config;
     public double2 Step;
     public int Width;
     public int Height;
@@ -59,8 +59,8 @@ namespace Mandelbrot.Jobs {
         // So we need to convert the coordinate to be inside that range
         // Before we supply it to Mandelbrot
         var ry = Config.Viewport.Min.y + (y * Step.y);
-        var n = MandelbrotSet.Calculate(rx, ry, Config.Iterations);
-        lastColor = lastN != n ? Utilities.GetColor((float)n / Config.Iterations, 0, Config.HSV, Config.HSVPower, Config.MandelbrotColor) : lastColor;
+        var n = MandelbrotSet.Calculate(rx, ry, Config.Iterations.Value);
+        lastColor = lastN != n ? Utilities.GetColor((float)n / Config.Iterations.Value, 0, Config.ColorSetup.HSV, Config.ColorSetup.HSVPower, Config.ColorSetup.MainColor) : lastColor;
         Colors[y * Width + x] = lastColor;
         lastN = n;
         TotalIterations.Increment(n);

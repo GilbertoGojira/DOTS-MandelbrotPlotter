@@ -1,16 +1,12 @@
+using System;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace Mandelbrot {
-  [GenerateAuthoringComponent]
-  public struct Config : IComponentData {
-    [Tooltip("Number of max iteratiosn per point")]
-    public int Iterations;
-    [Tooltip("Viewport where the mandelbrot set will be calculated")]
-    public Viewport Viewport;
-    [Tooltip("Color of the points inside the mandelbrot set")]
-    public Color MandelbrotColor;
+  [Serializable]
+  public struct MandelbrotColor : IComponentData {
+    public Color MainColor;
     [Range(0, 1)]
     public float H;
     [Range(0, 1)]

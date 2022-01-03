@@ -10,7 +10,7 @@ namespace Mandelbrot {
     private const int SQR_RADIUS = 4;
 
     /// <summary>
-    /// Calculates the number of iteratiosn required to exit
+    /// Calculates the number of iterations required to exit
     /// </summary>
     /// <param name="x"></param>
     /// <param name="y"></param>

@@ -9,8 +9,47 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace Mandelbrot {
+  [UpdateBefore(typeof(CalculateColorsSystem))]
+  public class CopyToConfigSystem : SystemBase {
+    BeginInitializationEntityCommandBufferSystem _entityCommandBufferSystem;
 
-  public class CalculateColors : SystemBase {
+    protected override void OnCreate() {
+      base.OnCreate();
+      _entityCommandBufferSystem = World.GetOrCreateSystem<BeginInitializationEntityCommandBufferSystem>();
+    }
+
+    protected override void OnUpdate() {
+      var ecb = _entityCommandBufferSystem.CreateCommandBuffer().AsParallelWriter();
+      Dependency = Entities
+        .WithNone<Viewport, MandelbrotColor, Iterations>()
+        .ForEach((Entity entity, int entityInQueryIndex, in MandelbrotConfig config) => {
+          ecb.AddComponent(entityInQueryIndex, entity, config.Viewport);
+          ecb.AddComponent(entityInQueryIndex, entity, config.ColorSetup);
+          ecb.AddComponent(entityInQueryIndex, entity, config.Iterations);
+        }).ScheduleParallel(Dependency);
+
+      Dependency = Entities
+        .WithChangeFilter<Viewport>()
+        .ForEach((ref MandelbrotConfig config, in Viewport viewport) => {
+          config.Viewport = viewport;
+        }).ScheduleParallel(Dependency);
+
+      Dependency = Entities
+        .WithChangeFilter<MandelbrotColor>()
+        .ForEach((ref MandelbrotConfig config, in MandelbrotColor colorSetup) => {
+          config.ColorSetup = colorSetup;
+        }).ScheduleParallel(Dependency);
+
+      Dependency = Entities
+        .WithChangeFilter<Iterations>()
+        .ForEach((ref MandelbrotConfig config, in Iterations iterations) => {
+          config.Iterations = iterations;
+        }).ScheduleParallel(Dependency);
+      _entityCommandBufferSystem.AddJobHandleForProducer(Dependency);
+    }
+  }
+
+  public class CalculateColorsSystem : SystemBase {
     EntityQuery _query;
     EntityQuery _missingQuery;
     NativeList<JobHandle> _jobHandles;
@@ -44,7 +83,7 @@ namespace Mandelbrot {
 
     protected override void OnCreate() {
       base.OnCreate();
-      _missingQuery = GetEntityQuery(typeof(Config), ComponentType.Exclude<PointColor>());
+      _missingQuery = GetEntityQuery(typeof(MandelbrotColor), ComponentType.Exclude<PointColor>());
       _jobHandles = new NativeList<JobHandle>(Allocator.Persistent);
     }
 
@@ -71,8 +110,8 @@ namespace Mandelbrot {
       Entities
         .WithoutBurst()
         .WithStoreEntityQueryInField(ref _query)
-        .WithChangeFilter<Config, TextureConfig>()
-        .ForEach((Entity entity, DynamicBuffer<PointColor> colors, in Config config, in TextureConfig textureConfig) => {
+        .WithChangeFilter<MandelbrotConfig, TextureConfig>()
+        .ForEach((Entity entity, DynamicBuffer<PointColor> colors, in MandelbrotConfig config, in TextureConfig textureConfig) => {
           var (_, counter, watch) = GetStatsCounter(counterIndex, entity);
           watch.Reset();
           watch.Start();

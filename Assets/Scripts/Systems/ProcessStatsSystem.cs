@@ -1,9 +1,5 @@
-using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
-using Unity.Mathematics;
-using Unity.Transforms;
 using UnityEngine;
 
 namespace Mandelbrot.UI {
@@ -20,11 +16,11 @@ namespace Mandelbrot.UI {
       Entities
       .WithoutBurst()
       .WithChangeFilter<Stats>()
-      .ForEach((Entity entity, in Stats stat, in Config config, in TextureConfig textureConfig) => {
+      .ForEach((Entity entity, in Stats stat, in Viewport viewport, in TextureConfig textureConfig) => {
         _uiSystem.AddPreAction((_, ui) => ui.StatsLabel?.SetText(string.Empty));
         var _stat = stat;
         var totalIterations = stat.Iterations;
-        var _config = config;
+        var _viewport = viewport;
         var _textureConfig = textureConfig;
         _uiSystem.AddAction((_, ui) => {
           var statsInfo =
@@ -34,7 +30,7 @@ namespace Mandelbrot.UI {
             $"{entity}:\n" +
             $"Executed {totalIterations} iterations in {_stat.Duration}ms.\n" +
             $"Average of {(float)_stat.Iterations / (_textureConfig.Width * _textureConfig.Height)} iterations per point\n" +
-            $"Resolution of {_textureConfig.Width}x{_textureConfig.Height} with {_textureConfig.Width * _textureConfig.Height} points and range {_config.Viewport}\n\n";
+            $"Resolution of {_textureConfig.Width}x{_textureConfig.Height} with {_textureConfig.Width * _textureConfig.Height} points and range {_viewport}\n\n";
           Debug.Log(statsInfo);
           if(ui.StatsLabel)
             ui.StatsLabel.text += statsInfo;

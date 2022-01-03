@@ -1,9 +1,10 @@
 using System;
 using Unity.Mathematics;
+using Unity.Entities;
 
 namespace Mandelbrot {
   [Serializable]
-  public struct Viewport {
+  public struct Viewport : IComponentData {
     public double2 Min;
     public double2 Max;
 
