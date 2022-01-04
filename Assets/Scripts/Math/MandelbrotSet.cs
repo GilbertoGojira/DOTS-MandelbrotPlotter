@@ -1,6 +1,4 @@
-using Mandelbrot.Math;
-
-namespace Mandelbrot {
+namespace Mandelbrot.Math {
 
   public static class MandelbrotSet {
 

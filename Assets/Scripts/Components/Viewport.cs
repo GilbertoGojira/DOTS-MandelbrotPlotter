@@ -33,6 +33,9 @@ namespace Mandelbrot {
       }
     }
 
+    public override string ToString() =>
+      Value.ToString();
+
     public static implicit operator Viewport(float3 v) =>
       new Viewport {
         Value = new MinMaxAABB { Min = v, Max = v }
