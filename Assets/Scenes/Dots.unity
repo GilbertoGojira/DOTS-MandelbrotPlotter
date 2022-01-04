@@ -614,12 +614,15 @@ MonoBehaviour:
   Iterations:
     Value: 255
   Viewport:
-    Min:
-      x: -2
-      y: -2
-    Max:
-      x: 2
-      y: 2
+    Value:
+      Center:
+        x: 0
+        y: 0
+        z: 0
+      Extents:
+        x: 2
+        y: 2
+        z: 0
   ColorSetup:
     MainColor: {r: 1, g: 0, b: 0, a: 1}
     H: 1
@@ -954,12 +957,15 @@ MonoBehaviour:
   Iterations:
     Value: 255
   Viewport:
-    Min:
-      x: -2
-      y: -2
-    Max:
-      x: 2
-      y: 2
+    Value:
+      Center:
+        x: 0
+        y: 0
+        z: 0
+      Extents:
+        x: 2
+        y: 2
+        z: 0
   ColorSetup:
     MainColor: {r: 0.90465856, g: 1, b: 0, a: 1}
     H: 1
