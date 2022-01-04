@@ -20,41 +20,6 @@ namespace Mandelbrot {
       return value == 1 ? defaultColor : color;
     }
 
-    public static Rect GetRenderWorldRect(Component c) {
-      var b = c.GetComponent<Renderer>().bounds;
-      return new Rect { min = b.min, max = b.max };
-    }
-
-    /// <summary>
-    /// Get renderer rect in screen coordenates
-    /// </summary>
-    public static Rect GetRenderScreenRect(Camera camera, Component c) {
-      var b = c.GetComponent<Renderer>().bounds;
-      return new Rect {
-        min = camera.WorldToScreenPoint(b.min),
-        max = camera.WorldToScreenPoint(b.max)
-      };
-    }
-
-    /// <summary>
-    /// Get screen point inside world rectangle
-    /// </summary>
-    public static float2 GetScreenPointInsideRect(Camera camera, Rect worldRect, float2 screenPosition) {
-      var min = camera.WorldToScreenPoint(worldRect.min);
-      return screenPosition - new float2(min.x, min.y);
-    }
-
-    /// <summary>
-    /// Get screen point inside world rednerer rectangle
-    /// </summary>
-    public static float2 GetScreenPointInsideRect(Camera camera, Component c, float2 screenPosition) =>
-      GetScreenPointInsideRect(camera, GetRenderWorldRect(c), screenPosition);
-
-    public static float2 GetViewportPosition(Viewport viewport, Rect rect, float2 position) =>
-      new float2(
-        position.x * viewport.Width / rect.width,
-        position.y * viewport.Height / rect.height) + viewport.Min.xy;
-
     /// <summary>
     /// Get point inside bounds
     /// </summary>
@@ -70,16 +35,7 @@ namespace Mandelbrot {
     /// <summary>
     /// Gets a screen position in viewport coordenates
     /// </summary>
-    public static float2 GetScreenPointInsideViewport(Camera camera, Component c, Viewport viewport, float2 screenPosition) =>
-      GetViewportPosition(
-        viewport,
-        GetRenderScreenRect(camera, c),
-        GetScreenPointInsideRect(camera, GetRenderWorldRect(c), screenPosition));
-
-    /// <summary>
-    /// Gets a screen position in viewport coordenates
-    /// </summary>
-    public static float2 GetScreenPointInsideViewport(AABB bounds, Viewport viewport, float2 screenPosition) =>
+    public static float2 GetScreenPointInsideViewport(AABB bounds, AABB viewport, float2 screenPosition) =>
       GetViewportPosition(
         viewport,
         bounds,

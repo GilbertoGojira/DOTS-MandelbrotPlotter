@@ -112,6 +112,8 @@ namespace Mandelbrot {
         .WithStoreEntityQueryInField(ref _query)
         .WithChangeFilter<MandelbrotConfig, TextureConfig>()
         .ForEach((Entity entity, DynamicBuffer<PointColor> colors, in MandelbrotConfig config, in TextureConfig textureConfig) => {
+          if (!config.CalculationReady)
+            return;
           var (_, counter, watch) = GetStatsCounter(counterIndex, entity);
           watch.Reset();
           watch.Start();

@@ -33,6 +33,7 @@ namespace Mandelbrot {
         .WithoutBurst()
         .WithChangeFilter<PointColor>()
         .ForEach((Entity entity, TextureRef texture, DynamicBuffer<PointColor> colors) => {
+          if (colors.IsEmpty) return;
           texture.Value.LoadRawTextureData(colors.AsNativeArray());
           texture.Value.Apply();
       }).Run();
