@@ -20,14 +20,15 @@ namespace Mandelbrot.Math {
     /// <param name="projectionMatrix"></param>
     /// <param name="worldToCameraMatrix"></param>
     /// <param name="pos"></param>
+    /// <param name="screenSize"></param>
     /// <returns></returns>
-    public static float2 WorldToScreenPoint(float4x4 projectionMatrix, float4x4 worldToCameraMatrix, float3 pos) {
+    public static float2 WorldToScreenPoint(float4x4 projectionMatrix, float4x4 worldToCameraMatrix, float3 pos, float2 screenSize) {
       var world2Screen = math.mul(projectionMatrix, worldToCameraMatrix);
       var screenPos = world2Screen.MultiplyPoint(pos);
       // (-1, 1)'s clip => (0 ,1)'s viewport
       screenPos = new float3(screenPos.x + 1f, screenPos.y + 1f, screenPos.z + 1f) / 2f;
       // viewport => screen
-      return new float2(screenPos.x * Screen.width, screenPos.y * Screen.height);
+      return new float2(screenPos.x * screenSize.x, screenPos.y * screenSize.y);
     }
 
     public static float3 ScreenToWorldPoint(float4x4 projectionMatrix, float4x4 worldToCameraMatrix, float4x4 localToWorldMatrix, float3 screenPos, float2 screenSize) {
