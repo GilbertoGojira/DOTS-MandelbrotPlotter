@@ -11,6 +11,7 @@ namespace Mandelbrot {
 
     protected override void OnCreate() {
       base.OnCreate();
+      RequireSingletonForUpdate<MainCamera>();
       _missingQuery = GetEntityQuery(
         ComponentType.ReadOnly<WorldRenderBounds>(),
         ComponentType.Exclude<ScreenRenderBounds>());
@@ -18,8 +19,9 @@ namespace Mandelbrot {
 
     protected override void OnUpdate() {
       EntityManager.AddComponent(_missingQuery, typeof(ScreenRenderBounds));
-      var worldToCameraMatrix = (float4x4)Camera.main.worldToCameraMatrix;
-      var projectionMatrix = Camera.main.projectionMatrix;
+      var camera = EntityManager.GetComponentObject<Camera>(GetSingletonEntity<MainCamera>());
+      var worldToCameraMatrix = (float4x4)camera.worldToCameraMatrix;
+      var projectionMatrix = camera.projectionMatrix;
       var screenSize = new float2(Screen.width, Screen.height);
       Dependency = Entities
         .WithChangeFilter<WorldRenderBounds>()
