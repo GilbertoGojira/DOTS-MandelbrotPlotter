@@ -56,6 +56,18 @@ namespace Mandelbrot {
         position.y * viewport.Height / rect.height) + viewport.Min.xy;
 
     /// <summary>
+    /// Get point inside bounds
+    /// </summary>
+    /// <param name="viewport"></param>
+    /// <param name="bounds"></param>
+    /// <param name="position"></param>
+    /// <returns></returns>
+    public static float2 GetViewportPosition(Viewport viewport, AABB bounds, float2 position) =>
+      new float2(
+        position.x * viewport.Width / bounds.Size.x,
+        position.y * viewport.Height / bounds.Size.y) + viewport.Min.xy;
+
+    /// <summary>
     /// Gets a screen position in viewport coordenates
     /// </summary>
     public static float2 GetScreenPointInsideViewport(Camera camera, Component c, Viewport viewport, float2 screenPosition) =>
@@ -63,5 +75,14 @@ namespace Mandelbrot {
         viewport,
         GetRenderScreenRect(camera, c),
         GetScreenPointInsideRect(camera, GetRenderWorldRect(c), screenPosition));
+
+    /// <summary>
+    /// Gets a screen position in viewport coordenates
+    /// </summary>
+    public static float2 GetScreenPointInsideViewport(AABB bounds, Viewport viewport, float2 screenPosition) =>
+      GetViewportPosition(
+        viewport,
+        bounds,
+        screenPosition);
   }
 }

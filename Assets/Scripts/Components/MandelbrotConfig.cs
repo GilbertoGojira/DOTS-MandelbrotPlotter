@@ -10,5 +10,11 @@ namespace Mandelbrot {
     public Viewport Viewport;
     [Tooltip("Color of the points for the mandelbrot set")]
     public MandelbrotColor ColorSetup;
+    [Tooltip("The factor that will be applied to the mandelbrot viewport (eg. 2 will double it's dimensions, 0.5 will reduce by half)")]
+    public float ZoomInFactor;
+    [Tooltip("The factor that will be applied to the mandelbrot viewport (eg. 2 will double it's dimensions, 0.5 will reduce by half)")]
+    public float ZoomOutFactor;
+    [Tooltip("The duration in seconds for the zoom")]
+    public float ZoomDuration;
   }
 }
