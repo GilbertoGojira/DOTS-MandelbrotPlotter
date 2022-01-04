@@ -2,7 +2,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 
 namespace Mandelbrot {
-  public class SetZoomSystem : SystemBase {
+  public class ZoomSystem : SystemBase {
     BeginInitializationEntityCommandBufferSystem _entityCommandBufferSystem;
 
     protected override void OnCreate() {
@@ -25,8 +25,8 @@ namespace Mandelbrot {
       Viewport target = Utilities.GetScreenPointInsideViewport(renderBounds, source, targetPoint);
       target.Width = source.Width * factor;
       target.Height = source.Height * factor;
-      ecb.AddComponent(sortKey, entity, new ZoomTime { Duration = duration });
-      ecb.AddComponent(sortKey, entity, new ZoomViewport {
+      ecb.AddComponent(sortKey, entity, new InterpolationTime { Duration = duration });
+      ecb.AddComponent(sortKey, entity, new ViewportInterpolation {
         Source = source,
         Target = target
       });
