@@ -28,8 +28,8 @@ namespace Mandelbrot {
         .ForEach((ref ScreenRenderBounds sBounds, in WorldRenderBounds wBounds) =>
            sBounds = new ScreenRenderBounds {
              Value = new MinMaxAABB {
-               Min = CameraUtility.WorldToScreenPoint(projectionMatrix, worldToCameraMatrix, wBounds.Value.Min, screenSize).xyy,
-               Max = CameraUtility.WorldToScreenPoint(projectionMatrix, worldToCameraMatrix, wBounds.Value.Max, screenSize).xyy
+               Min = new float3(CameraUtility.WorldToScreenPoint(projectionMatrix, worldToCameraMatrix, wBounds.Value.Min, screenSize), 0),
+               Max = new float3(CameraUtility.WorldToScreenPoint(projectionMatrix, worldToCameraMatrix, wBounds.Value.Max, screenSize), 0)
              }
            })
         .ScheduleParallel(Dependency);
