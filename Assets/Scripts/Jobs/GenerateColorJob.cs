@@ -6,7 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 
 namespace Mandelbrot.Jobs {
-  [BurstCompile]
+  //[BurstCompile]
   struct GenerateColorJob : IJobFor {
     public double2 Step;
     public int Width;

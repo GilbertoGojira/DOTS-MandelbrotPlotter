@@ -137,7 +137,7 @@ namespace Mandelbrot {
         DefaultColor = _settings.MandelbrotColor,
         Colors = colors,
         TotalIterations = totalIterations
-      }.ScheduleParallel(_width, 128, default)
+      }.Schedule(_width, default)
       .Complete();
 
       _texture.LoadRawTextureData(colors);
