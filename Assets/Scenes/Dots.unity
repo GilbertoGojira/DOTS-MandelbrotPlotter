@@ -490,12 +490,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press any key or click anywhere to plot Mandelbrot set
+  m_text: 'Click anywhere to plot the Mandelbrot set
 
-    Left click
-    to zoom in
+    Left click to zoom in
 
-    Right click to zoom out
+    Right
+    click to zoom out
 
     Press R to reset viewport
 
@@ -612,7 +612,7 @@ MonoBehaviour:
   Width: 2048
   Height: 2048
   TextureFormat: 4
-  Filter: 0
+  Filter: 1
 --- !u!114 &1318557891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,6 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaa6d8433cad9e4d9442b3259a4d81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CalculationReady: 0
   Iterations:
     Value: 255
   Viewport:
