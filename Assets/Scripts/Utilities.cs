@@ -50,15 +50,15 @@ namespace Mandelbrot {
     public static float2 GetScreenPointInsideRect(Camera camera, Component c, float2 screenPosition) =>
       GetScreenPointInsideRect(camera, GetRenderWorldRect(c), screenPosition);
 
-    public static double2 GetViewportPosition(Viewport viewport, Rect rect, float2 position) =>
-      new double2(
+    public static float2 GetViewportPosition(Viewport viewport, Rect rect, float2 position) =>
+      new float2(
         position.x * viewport.Width / rect.width,
-        position.y * viewport.Height / rect.height) + viewport.Min;
+        position.y * viewport.Height / rect.height) + viewport.Min.xy;
 
     /// <summary>
     /// Gets a screen position in viewport coordenates
     /// </summary>
-    public static double2 GetScreenPointInsideViewport(Camera camera, Component c, Viewport viewport, float2 screenPosition) =>
+    public static float2 GetScreenPointInsideViewport(Camera camera, Component c, Viewport viewport, float2 screenPosition) =>
       GetViewportPosition(
         viewport,
         GetRenderScreenRect(camera, c),

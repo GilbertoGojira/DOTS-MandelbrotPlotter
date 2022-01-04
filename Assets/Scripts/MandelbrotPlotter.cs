@@ -61,7 +61,7 @@ namespace Mandelbrot {
     [SerializeField]
     Settings _settings = new Settings {
       Iterations = 255,
-      Viewport = new Viewport { Min = new float2(-2), Max = new float2(2) },
+      Viewport = new Viewport { Value = new MinMaxAABB { Min = -2, Max = 2 } },
       MandelbrotColor = Color.green,
       H = 0.25f,
       S = 1,
@@ -154,7 +154,7 @@ namespace Mandelbrot {
       _zooming = _zoomTime < 1;
       var min = math.lerp(source.Min, target.Min, _zoomCurve.Evaluate(_zoomTime));
       var max = math.lerp(source.Max, target.Max, _zoomCurve.Evaluate(_zoomTime));
-      _settings.Viewport = new Viewport { Min = min, Max = max };
+      _settings.Viewport = new MinMaxAABB { Min = min, Max = max };
     }
 
     void SetZoom(bool _in, Viewport target, float zoomFactor) {
