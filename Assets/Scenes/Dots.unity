@@ -609,8 +609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe57cb09ead0427893d852c79d1db24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 256
-  Height: 256
+  Width: 2048
+  Height: 2048
   TextureFormat: 4
   Filter: 0
 --- !u!114 &1318557891
@@ -651,7 +651,7 @@ MonoBehaviour:
         y: 2
         z: 0
   ColorSetup:
-    MainColor: {r: 1, g: 0, b: 0, a: 1}
+    MainColor: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
     H: 1
     S: 0.9
     V: 1
@@ -926,7 +926,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 860, y: 480}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
