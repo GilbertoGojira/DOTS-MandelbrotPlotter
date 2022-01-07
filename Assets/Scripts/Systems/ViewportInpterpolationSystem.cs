@@ -24,11 +24,21 @@ namespace Mandelbrot {
         }).ScheduleParallel(Dependency);
 
       Dependency = Entities
+        .WithNone<AnimationCurve>()
         .ForEach((ref Viewport viewport, in ViewportInterpolation interpolation, in InterpolationTime time) => {
           var source = interpolation.Source;
           var target = interpolation.Target;
           var min = math.lerp(source.Min, target.Min, time.Elapsed);
           var max = math.lerp(source.Max, target.Max, time.Elapsed);
+          viewport = new MinMaxAABB { Min = min, Max = max };
+        }).ScheduleParallel(Dependency);
+
+      Dependency = Entities
+        .ForEach((DynamicBuffer<AnimationCurve> curve, ref Viewport viewport, in ViewportInterpolation interpolation, in InterpolationTime time) => {
+          var source = interpolation.Source;
+          var target = interpolation.Target;
+          var min = math.lerp(source.Min, target.Min, curve.Evalute(time.Elapsed));
+          var max = math.lerp(source.Max, target.Max, curve.Evalute(time.Elapsed));
           viewport = new MinMaxAABB { Min = min, Max = max };
         }).ScheduleParallel(Dependency);
 
