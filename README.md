@@ -19,3 +19,6 @@ Profiling of the Mandelbrot execution is displayed inside the viewport.
 
 #### TODO:
 Use pure DOTS. Right now the "hard" world is done using jobs and burst compiler which translates to insanely fast iteration times, but a pure DOTS would be more elegant for the future.
+
+https://user-images.githubusercontent.com/5209751/148612242-00aa87ec-ac98-4708-a2e9-d50073f86518.mov
+
