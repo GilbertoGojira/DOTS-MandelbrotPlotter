@@ -24,7 +24,7 @@ namespace Mandelbrot {
 
   public static class AnimationCurveExt {
     public static float Evalute(this DynamicBuffer<AnimationCurve> curve, float time) {
-      return curve[(int)math.round(curve.Length * time)].Value;
+      return curve[(int)math.round((curve.Length - 1) * time)].Value;
     }
   }
 }

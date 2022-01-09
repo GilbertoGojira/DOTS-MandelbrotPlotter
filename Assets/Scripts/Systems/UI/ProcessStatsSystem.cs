@@ -4,25 +4,18 @@ using UnityEngine;
 
 namespace Mandelbrot.UI {
 
-  public class ProcessStatsSystem : SystemBase {
-    MainUISystem _uiSystem;
-
-    protected override void OnCreate() {
-      base.OnCreate();
-      _uiSystem = World.GetOrCreateSystem<MainUISystem>();
-    }
-
+  public class ProcessStatsSystem : UISystemBase<MandelbrotUI> {
     protected override void OnUpdate() {
       Entities
       .WithoutBurst()
       .WithChangeFilter<Stats>()
       .ForEach((Entity entity, in Stats stat, in Viewport viewport, in TextureConfig textureConfig) => {
-        _uiSystem.AddPreAction((_, ui) => ui.StatsLabel?.SetText(string.Empty));
+        UISystem.AddPreAction((_, ui) => ui.StatsLabel?.SetText(string.Empty));
         var _stat = stat;
         var totalIterations = stat.Iterations;
         var _viewport = viewport;
         var _textureConfig = textureConfig;
-        _uiSystem.AddAction((_, ui) => {
+        UISystem.AddAction((_, ui) => {
           var statsInfo =
 #if UNITY_EDITOR
                 $"{EntityManager.GetName(entity)} " +
