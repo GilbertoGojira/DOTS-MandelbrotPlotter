@@ -885,8 +885,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 882186324}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 255
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1273,8 +1273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb413c1a30f06406cb3a0aece480c797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Iterations: {fileID: 0}
-  StatsLabel: {fileID: 525042156}
+  _reference: {fileID: 1318557889}
+  _iterations: {fileID: 1073024329}
+  _statsLabel: {fileID: 525042156}
 --- !u!4 &2051413337
 Transform:
   m_ObjectHideFlags: 0
@@ -1301,7 +1302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConversionMode: 0
+  ConversionMode: 1
 --- !u!1 &2101370287
 GameObject:
   m_ObjectHideFlags: 0
