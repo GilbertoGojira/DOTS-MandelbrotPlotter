@@ -25,7 +25,7 @@ namespace Mandelbrot {
             if (!config.CalculationReady)
               config.CalculationReady = true;
             else
-              StartZoom(ecb, entityInQueryIndex, entity, bounds.Value, viewport, GetZoomFactor(status.Type, config), status.Position, 2f);
+              StartZoom(ecb, entityInQueryIndex, entity, bounds.Value, viewport, GetZoomFactor(status.Type, config), status.Position, config.ZoomDuration);
           }
         }).ScheduleParallel(Dependency);
 
