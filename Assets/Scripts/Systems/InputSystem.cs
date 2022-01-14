@@ -21,6 +21,7 @@ namespace Mandelbrot {
   public class InputSystem : SystemBase {
     BeginInitializationEntityCommandBufferSystem _entityCommandBufferSystem;
     EntityQuery _missingQuery;
+    Vector3 _lockedPosition;
 
     protected override void OnCreate() {
       base.OnCreate();
@@ -31,9 +32,11 @@ namespace Mandelbrot {
     protected override void OnUpdate() {
       EntityManager.AddComponent(_missingQuery, typeof(InputStatus));
 
-      var leftMouseDown = Input.GetMouseButtonDown(0);
-      var rightMouseDown = Input.GetMouseButtonDown(1);
-      var mousePosition = Input.mousePosition;
+      _lockedPosition = Input.GetKeyDown(KeyCode.L) ? Input.mousePosition : _lockedPosition;
+      var mouseDown = Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1);
+      var leftMouseDown = Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.UpArrow);
+      var rightMouseDown = Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.DownArrow);
+      var mousePosition = mouseDown ? Input.mousePosition : _lockedPosition;
 
       if (leftMouseDown || rightMouseDown)
         Dependency = Entities
