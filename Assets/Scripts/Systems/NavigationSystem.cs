@@ -2,6 +2,7 @@ using Mandelbrot.Jobs;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
+using Mandelbrot.Components;
 
 namespace Mandelbrot {
   public class NavigationSystem : SystemBase {
@@ -20,12 +21,12 @@ namespace Mandelbrot {
       var ecb = _entityCommandBufferSystem.CreateCommandBuffer().AsParallelWriter();
       Dependency = Entities
         .WithChangeFilter<InputStatus>()
-        .ForEach((Entity entity, int entityInQueryIndex, ref MandelbrotConfig config, in ScreenRenderBounds bounds, in Viewport viewport, in InputStatus status) => {
+        .ForEach((Entity entity, int entityInQueryIndex, ref Config config, in Zoom zoom, in ScreenRenderBounds bounds, in Viewport viewport, in InputStatus status) => {
           if (status.Type != InputType.NONE) {
             if (!config.CalculationReady)
               config.CalculationReady = true;
             else
-              StartZoom(ecb, entityInQueryIndex, entity, bounds.Value, viewport, GetZoomFactor(status.Type, config), status.Position, config.ZoomDuration);
+              StartZoom(ecb, entityInQueryIndex, entity, bounds.Value, viewport, GetZoomFactor(status.Type, zoom), status.Position, zoom.Duration);
           }
         }).ScheduleParallel(Dependency);
 
@@ -53,12 +54,12 @@ namespace Mandelbrot {
       });
     }
 
-    static float GetZoomFactor(InputType type, MandelbrotConfig config) {
+    static float GetZoomFactor(InputType type, Zoom config) {
       switch (type) {
         case InputType.LEFT_CLICK:
-          return config.ZoomInFactor;
+          return config.InFactor;
         case InputType.RIGHT_CLICK:
-          return config.ZoomOutFactor;
+          return config.OutFactor;
       }
       return 0;
     }

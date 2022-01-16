@@ -2,7 +2,7 @@ using System;
 using Unity.Mathematics;
 using Unity.Entities;
 
-namespace Mandelbrot {
+namespace Mandelbrot.Components {
   [Serializable]
   public struct Viewport : IComponentData {
     public AABB Value;

@@ -1,7 +1,7 @@
 using Unity.Entities;
 using UnityEngine;
 
-namespace Mandelbrot {
+namespace Mandelbrot.Components {
   public struct PointColor : IBufferElementData {
     public Color32 Value;
   }

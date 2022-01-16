@@ -1,9 +1,9 @@
+using Mandelbrot.Components;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 
-namespace Mandelbrot {
-
+namespace Mandelbrot.Systems {
   /// <summary>
   /// Interpolates viewport between 2 values during a given time
   /// </summary>

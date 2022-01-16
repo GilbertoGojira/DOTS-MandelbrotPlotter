@@ -1,0 +1,17 @@
+{
+  "name": "com.gilcat.mandelbrot",
+  "displayName": "DOTS Mandelbrot",
+  "version": "0.0.5",
+  "unity": "2020.3",
+  "unityRelease": "26f1",
+  "description": "Mandelbrot Set generator",
+  "keywords": [
+    "entities",
+    "unity",
+    "DOTS",
+    "mandelbrot"
+  ],
+  "dependencies": {
+    "com.unity.entities": "0.17.0-preview.42"
+  }
+}

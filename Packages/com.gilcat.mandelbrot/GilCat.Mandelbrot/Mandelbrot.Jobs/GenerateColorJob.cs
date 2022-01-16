@@ -1,4 +1,5 @@
 using Mandelbrot.Collections;
+using Mandelbrot.Components;
 using Mandelbrot.Math;
 using Unity.Burst;
 using Unity.Collections;
@@ -10,7 +11,7 @@ using UnityEngine;
 namespace Mandelbrot.Jobs {
   [BurstCompile]
   struct GenerateColorJob : IJobFor {
-    public MandelbrotConfig Config;
+    public Config Config;
     public double2 Step;
     public int Width;
     public int Height;

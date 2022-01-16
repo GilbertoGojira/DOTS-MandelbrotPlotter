@@ -1,17 +1,8 @@
 using Unity.Entities;
 using Unity.Mathematics;
+using Mandelbrot.Components;
 
-namespace Mandelbrot {
-  public struct ViewportInterpolation : IComponentData {
-    public Viewport Source;
-    public Viewport Target;
-  }
-
-  public struct InterpolationTime : IComponentData {
-    public float Elapsed;
-    public float Duration;
-  }
-
+namespace Mandelbrot.Components {
   /// <summary>
   /// Normalized animation curve
   /// </summary>

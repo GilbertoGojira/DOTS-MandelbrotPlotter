@@ -27,10 +27,10 @@ namespace Mandelbrot {
     /// <param name="bounds"></param>
     /// <param name="position"></param>
     /// <returns></returns>
-    public static float2 GetViewportPosition(Viewport viewport, AABB bounds, float2 position) =>
+    public static float2 GetViewportPosition(AABB viewport, AABB bounds, float2 position) =>
       new float2(
-        (position.x - bounds.Min.x) * viewport.Width / bounds.Size.x,
-        (position.y - bounds.Min.y) * viewport.Height / bounds.Size.y) + viewport.Min.xy;
+        (position.x - bounds.Min.x) * viewport.Size.x / bounds.Size.x,
+        (position.y - bounds.Min.y) * viewport.Size.y / bounds.Size.y) + viewport.Min.xy;
 
     /// <summary>
     /// Gets a screen position in viewport coordenates

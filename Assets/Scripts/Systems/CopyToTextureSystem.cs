@@ -1,6 +1,6 @@
+using Mandelbrot.Components;
 using Unity.Entities;
 using Unity.Jobs;
-using UnityEngine;
 
 namespace Mandelbrot {
   public class CopyToTextureSystem : SystemBase {
@@ -11,7 +11,7 @@ namespace Mandelbrot {
         .WithoutBurst()
         .WithStructuralChanges()
         .WithNone<TextureRef>()
-        .ForEach((Entity entity, in TextureConfig config) =>
+        .ForEach((Entity entity, in Resolution config) =>
           EntityManager.AddComponentObject(entity, new TextureRef())
         ).Run();
 
@@ -19,10 +19,10 @@ namespace Mandelbrot {
       // with proper config
       Entities
         .WithoutBurst()
-        .WithChangeFilter<TextureConfig>()
-        .ForEach((Entity entity, TextureRef texture, in TextureConfig config) => {
-          Object.Destroy(texture.Value);
-          texture.Value = new Texture2D(config.Width, config.Height, config.TextureFormat, false);
+        .WithChangeFilter<Resolution, TextureConfig>()
+        .ForEach((Entity entity, TextureRef texture, in Resolution resolution, in TextureConfig config) => {
+          UnityEngine.Object.Destroy(texture.Value);
+          texture.Value = new UnityEngine.Texture2D(resolution.Width, resolution.Height, config.TextureFormat, false);
           // TODO: Maybe we should have this attribute in another component to avoid creating
           // a new texture everytime we change it
           texture.Value.filterMode = config.Filter;

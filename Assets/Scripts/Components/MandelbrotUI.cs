@@ -5,10 +5,11 @@ using TMPro;
 using Unity.Entities;
 using UnityEngine;
 using UnityEngine.UI;
+using Mandelbrot.Components;
 
 [assembly: RegisterGenericComponentType(typeof(UIGetAction<Iterations>))]
 [assembly: RegisterGenericComponentType(typeof(UISetAction<Iterations>))]
-[assembly: RegisterGenericComponentType(typeof(UIGetAction<Stats, TextureConfig, Viewport>))]
+[assembly: RegisterGenericComponentType(typeof(UIGetAction<Stats, Mandelbrot.Components.Resolution, Viewport>))]
 
 namespace Mandelbrot.UI {
   public class MandelbrotUI: MonoBehaviour, IConvertGameObjectToEntity {
@@ -44,11 +45,11 @@ namespace Mandelbrot.UI {
     }
 
     void CreateUIActionsForStats(World world, Entity source, Entity target) {
-      Utilities.CreateUIGetAction<Stats, TextureConfig, Viewport>(world.EntityManager, source, GetStats, target);
-      world.ForceGetOrCreateSystem<UISystem<Stats, TextureConfig, Viewport>>();
+      Utilities.CreateUIGetAction<Stats, Components.Resolution, Viewport>(world.EntityManager, source, this.GetStats, target);
+      world.ForceGetOrCreateSystem<UISystem<Stats, Components.Resolution, Viewport>>();
     }
 
-    void GetStats(Entity entity, Stats stat, TextureConfig textureConfig, Viewport viewport) {
+    void GetStats(Entity entity, Stats stat, Components.Resolution textureConfig, Viewport viewport) {
       var statsInfo =
             $"{entity}:\n" +
             $"Executed {stat.Iterations} iterations in {stat.Duration}ms.\n" +

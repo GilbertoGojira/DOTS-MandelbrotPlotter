@@ -3,9 +3,9 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Mandelbrot {
+namespace Mandelbrot.Components {
   [Serializable]
-  public struct MandelbrotColor : IComponentData {
+  public struct HSVColor : IComponentData {
     public Color MainColor;
     [Range(0, 1)]
     public float H;
