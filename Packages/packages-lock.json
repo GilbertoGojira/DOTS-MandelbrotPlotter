@@ -1,12 +1,13 @@
 {
   "dependencies": {
     "com.gilcat.mandelbrot": {
-      "version": "file:com.gilcat.mandelbrot",
+      "version": "git@github.com:GilbertoGojira/DOTS-MandelbrotPlotter.git",
       "depth": 0,
-      "source": "embedded",
+      "source": "git",
       "dependencies": {
         "com.unity.entities": "0.17.0-preview.42"
-      }
+      },
+      "hash": "f4968230f2018ec93357be910b9d66a49e20dff4"
     },
     "com.unity.burst": {
       "version": "1.4.1",
