@@ -1,0 +1,3 @@
+[submodule "Packages/com.gilcat.mandelbrot"]
+	path = Packages/com.gilcat.mandelbrot
+	url = git@github.com:GilbertoGojira/DOTS-MandelbrotPlotter.git
